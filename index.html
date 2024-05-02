@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script>
+        var peer = new Peer({host: '127.0.0.1', port: '9000', path: '/myapp'});
+        var conn = null; //peer.connect('656414fd-7f8c-4431-82e1-a1face992100');
+        // on open will be launch when you successfully connect to PeerServer
+        peer.on('open', function(id) {
+                console.log('My peer ID is: ' + id);
+        });
+        function connect() {
+            const connectionID = document.querySelector('#connection').value;
+            console.log(connectionID);
+            conn = peer.connect(connectionID);
+            conn.on('open', function() {
+                conn.on('data', function(data) {
+                    console.log('Received', data);
+                });
+                // here you have conn.id
+                conn.send('hi!');
+            });
+            
+            peer.on('connection', function(conn) {
+                conn.on('data', function(data){
+                    // Will print 'hi!'
+                    console.log(data);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="text" id="connection" />
+        <button onclick="connect()">connect</button>
+    </div>
+</body>
+</html>
