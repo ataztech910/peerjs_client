@@ -15,6 +15,7 @@ export default function AuthForm() {
       }
     });
     return <div className="max-w-[50%] m-auto">
+              <h1>Welcome to the Peer.js Playrground!</h1>
               <Auth 
                 supabaseClient={supabase} 
                 appearance={{theme: ThemeSupa}} 

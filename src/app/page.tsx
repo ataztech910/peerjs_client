@@ -139,7 +139,6 @@ export default function Home() {
   const supabase = useSupabaseClient();
   const [user, setUser] = useState<UserType>({} as UserType);
   const [error, setError] = useState(false);
-  // const [peer, setPeer] = useState<any>(null);
   console.log('Component reload');
 
   useEffect(() => {
